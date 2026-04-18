@@ -142,7 +142,7 @@ CONFIG = {
 
     # ── Modes ───────────────────────────────────────────────────────
     "DRY_RUN":  True,               # True = paper only, never real orders
-    "VERBOSE":  False,              # True = detailed debug logs
+    "VERBOSE":  True,              # True = detailed debug logs
     "RUNNING":  True,               # False = manual kill switch
 
     # ── State File ──────────────────────────────────────────────────
