@@ -1,1 +1,1 @@
-d29ya2VyOiBweXRob24zIG1haW4ucHk=
+worker: python3 main.py
