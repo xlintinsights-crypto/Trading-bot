@@ -734,7 +734,7 @@ def check_market_conditions():
     # DEX volume check
     dex_buf = state["dex_volume_buffer"]
     dex_low = False
-    if len(dex_buf) >= 3:
+    if len(dex_buf) >= 10:
         rolling_avg = sum(dex_buf) / len(dex_buf)
         current_vol = dex_buf[-1]
         if rolling_avg > 0:
@@ -1680,7 +1680,7 @@ def scan_and_trade():
 
     # Low volatility check
     dex_buf = state["dex_volume_buffer"]
-    if len(dex_buf) >= 3:
+    if len(dex_buf) >= 10:
         rolling_avg = sum(dex_buf) / len(dex_buf)
         if rolling_avg > 0 and dex_buf[-1] < rolling_avg * CONFIG["min_dex_volume_ratio"]:
             log("Global DEX volume too low. Skipping scan.", "DEBUG")
