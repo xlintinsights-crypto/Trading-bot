@@ -1,3 +1,6 @@
+import sys
+sys.stdout.reconfigure(line_buffering=True)
+
 """
 ╔══════════════════════════════════════════════════════════════════╗
 ║              DEX SNIPER BOT — PAPER TRADING ENGINE              ║
