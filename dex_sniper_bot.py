@@ -638,17 +638,14 @@ def update_btc_buffer(btc_price):
 # ═══════════════════════════════════════════════════════════════════
 
 def fetch_btc_price():
-    """Fetch current BTC price from CoinGecko (free)."""
-    url = "https://api.coingecko.com/api/v3/simple/price"
-    params = {"ids": "bitcoin", "vs_currencies": "usd"}
+    """Fetch BTC price from Binance public API (no rate limit issues)."""
+    url = "https://api.binance.com/api/v3/ticker/price"
+    params = {"symbol": "BTCUSDT"}
     data = safe_api_call(url, params=params)
     if data is None:
         return None
-    price = deep_get(data, "bitcoin", "usd")
-    if price is None:
-        return None
     try:
-        return float(price)
+        return float(data.get("price", 0))
     except (ValueError, TypeError):
         return None
 
