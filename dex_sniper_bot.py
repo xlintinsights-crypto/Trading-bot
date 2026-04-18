@@ -29,7 +29,7 @@ from collections import deque
 
 CONFIG = {
     # ── Chain & Market ──────────────────────────────────────────────
-    "chain": "solana",               # "solana" | "bsc" | "ethereum" | "base"
+    "chain": "bsc",               # "solana" | "bsc" | "ethereum" | "base"
 
     # ── Adaptive Mode Score Thresholds ──────────────────────────────
     "score_threshold": {
@@ -109,7 +109,7 @@ CONFIG = {
     "circuit_breaker_max":    900,
 
     # ── API Stability ───────────────────────────────────────────────
-    "min_api_delay":           0.3,
+    "min_api_delay":           2.0,
     "backoff_sequence":       [2, 4, 8],
     "max_backoff":            60,
     "api_failure_pause_min":  60,
@@ -130,7 +130,7 @@ CONFIG = {
 
     # ── Filters ─────────────────────────────────────────────────────
     "min_dex_volume_ratio":    0.50, # 50% of rolling avg
-    "min_trades_per_5min":     15,
+    "min_trades_per_5min":     1,
     "price_glitch_pct":        0.12, # 12% jump without volume = glitch
     "invalidation_window_sec": 25,
     "invalidation_min_move":   0.005,# 0.5% min move in first 25s
@@ -500,11 +500,15 @@ def fetch_pairs():
     Fetch top pairs from DEX Screener for configured chain.
     Returns list of pair dicts, or empty list on failure.
     """
-    url = f"https://api.dexscreener.com/latest/dex/tokens/trending"
-    # Use chain-specific search for better results
-    chain = CONFIG["chain"]
-    search_url = f"https://api.dexscreener.com/latest/dex/search/?q={chain}"
 
+
+    chain = CONFIG["chain"]
+    queries = [
+    "https://api.dexscreener.com/latest/dex/search/?q=USDC%20bsc",
+    "https://api.dexscreener.com/latest/dex/search/?q=BNB%20meme",
+    "https://api.dexscreener.com/latest/dex/search/?q=BNB%20token",
+]
+    search_url = random.choice(queries)
     data = safe_api_call(search_url)
     if data is None:
         log("fetch_pairs: DEX Screener returned None.", "WARN")
