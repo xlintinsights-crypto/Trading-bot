@@ -638,15 +638,15 @@ def update_btc_buffer(btc_price):
 # ═══════════════════════════════════════════════════════════════════
 
 def fetch_btc_price():
-    """Fetch BTC price from Binance public API (no rate limit issues)."""
-    url = "https://api.binance.com/api/v3/ticker/price"
-    params = {"symbol": "BTCUSDT"}
+    """Fetch BTC price from OKX public API."""
+    url = "https://www.okx.com/api/v5/market/ticker"
+    params = {"instId": "BTC-USDT"}
     data = safe_api_call(url, params=params)
     if data is None:
         return None
     try:
-        return float(data.get("price", 0))
-    except (ValueError, TypeError):
+        return float(data["data"][0]["last"])
+    except (KeyError, IndexError, TypeError, ValueError):
         return None
 
 
