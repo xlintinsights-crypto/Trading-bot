@@ -33,9 +33,9 @@ CONFIG = {
 
     # ── Adaptive Mode Score Thresholds ──────────────────────────────
     "score_threshold": {
-        "QUIET":  90,
-        "ACTIVE": 82,
-        "HOT":    77
+        "QUIET":  65,
+        "ACTIVE": 70,
+        "HOT":    75
     },
 
     # ── Liquidity & Spread ──────────────────────────────────────────
@@ -129,7 +129,7 @@ CONFIG = {
     "dex_vol_buffer_size": 30,
 
     # ── Filters ─────────────────────────────────────────────────────
-    "min_dex_volume_ratio":    0.50, # 50% of rolling avg
+    "min_dex_volume_ratio":    0.10, # 10% of rolling avg
     "min_trades_per_5min":     1,
     "price_glitch_pct":        0.12, # 12% jump without volume = glitch
     "invalidation_window_sec": 25,
