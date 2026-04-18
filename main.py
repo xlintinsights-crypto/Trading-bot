@@ -1,1 +1,7 @@
-aW1wb3J0IHN5CnxzeXMuc3Rkb3V0LnJlY29uZmlndXJlKGxpbmVfYnVmZmVyaW5nPVRydWUpCgoiIiIK
+import sys
+sys.stdout.reconfigure(line_buffering=True)
+
+from dex_sniper_bot import main
+
+if __name__ == "__main__":
+    main()
