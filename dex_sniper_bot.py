@@ -104,7 +104,7 @@ CONFIG = {
 
     # ── Circuit Breaker ─────────────────────────────────────────────
     "btc_drop_trigger_pct":    -2.0,
-    "dex_volume_spike_x":       5.0,
+    "dex_volume_spike_x":       8.0,
     "circuit_breaker_min":    600,
     "circuit_breaker_max":    900,
 
