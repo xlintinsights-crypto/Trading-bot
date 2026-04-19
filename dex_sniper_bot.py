@@ -89,7 +89,7 @@ CONFIG = {
     # ── Risk Management ─────────────────────────────────────────────
     "max_trades_per_day":       5,
     "max_consecutive_losses":   2,
-    "daily_loss_limit_pct":    -3.0,
+    "daily_loss_limit_pct":    -15.0,
     "cooldown_after_trade":     90,  # seconds after close
     "duplicate_entry_cooldown": 60,  # seconds after entry
 
@@ -1581,6 +1581,11 @@ def monitor_trade():
         f"Peak {(peak_price/entry_price-1)*100:+.2f}% | "
         f"Trail {'ON' if trade['trailing_active'] else 'OFF'} | "
         f"Vol ratio {vol_ratio_to_entry:.1%}", "DEBUG")
+    # Emergency exit if stuck with no data too long
+    trade["monitor_skip_count"] = trade.get("monitor_skip_count", 0) + 1
+    if trade["monitor_skip_count"] > 30:
+        close_trade(trade, entry_price, "EMERGENCY_EXIT", "stuck trade - no data")
+        return True
 
     return False
 
