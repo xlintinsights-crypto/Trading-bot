@@ -1441,6 +1441,9 @@ def monitor_trade():
 
     valid, reason = validate_data(fresh_pair)
     if not valid:
+    # During monitoring, only skip on critical failures
+    # Activity check not required for exit decisions
+    if "low activity" not in reason:
         log(f"Monitor: invalid data ({reason}). Skipping.", "WARN")
         return False
 
