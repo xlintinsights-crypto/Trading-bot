@@ -1443,9 +1443,9 @@ def monitor_trade():
     if not valid:
     # During monitoring, only skip on critical failures
     # Activity check not required for exit decisions
-    if "low activity" not in reason:
-        log(f"Monitor: invalid data ({reason}). Skipping.", "WARN")
-        return False
+        if "low activity" not in reason:
+            log(f"Monitor: invalid data ({reason}). Skipping.", "WARN")
+            return False
 
     ohlcv = fetch_ohlcv(fresh_pair)
     if ohlcv is None:
